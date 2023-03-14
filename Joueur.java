@@ -33,7 +33,23 @@ public class Joueur {
         this.score++;
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public void setAJoue(boolean bool) {
         this.aJoue = bool;
+    }
+
+    public boolean isAJoue() {
+        return aJoue;
+    }
+
+    public void setRang(int rang) {
+        this.rang = rang;
+    }
+
+    public int getRang() {
+        return rang;
     }
 }

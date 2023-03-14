@@ -73,7 +73,4 @@ public class Podium {
         sb.append(this.couleur);
         return sb.toString();
     }
-
-
-
 }

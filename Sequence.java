@@ -22,26 +22,38 @@ public class Sequence {
 
         for (Ordres testOrdre: morceauSequence) {
             switch (testOrdre) {
-                case MA : carteTemp.getpRouge().ajouter_haut(carteTemp.getpRouge().retirer_bas());
-                case NI : carteTemp.getpBleu().ajouter_haut(carteTemp.getpBleu().retirer_bas());
-                case KI : carteTemp.getpRouge().ajouter_haut(carteTemp.getpBleu().retirer_sommet());
-                case LO : carteTemp.getpBleu().ajouter_haut(carteTemp.getpRouge().retirer_sommet());
-                case SO : if(carteTemp.getpBleu().getNbAnimal() > carteTemp.getpRouge().getNbAnimal()) {
-                    carteTemp.getpRouge().ajouter_haut(carteTemp.getpBleu().retirer_sommet());
-                    carteTemp.getpBleu().ajouter_haut(carteTemp.getpRouge().retirer_bas());
-                }
-                else {
-                    carteTemp.getpBleu().ajouter_haut(carteTemp.getpRouge().retirer_sommet());
-                    carteTemp.getpRouge().ajouter_haut(carteTemp.getpBleu().retirer_bas());
-                }
-                default : throw new IllegalStateException("L'ordre suivant n'existe pas : " + testOrdre);
+                case MA : // L’animal se trouvant en bas de la pile du podium rouge monte et se place en haut de la pile de ce même podium.
+                    if (carteTemp.getpRouge().getNbAnimal() != 0)
+                        carteTemp.getpRouge().ajouter_haut(carteTemp.getpRouge().retirer_bas());
+                    else throw new IllegalArgumentException("L'ordre ne pas pas être exécuter car aucun animal ne peut être déplacé.");
+                case NI : // L’animal se trouvant en bas de la pile du podium bleu monte et se place en haut de la pile de ce même podium.
+                    if (carteTemp.getpBleu().getNbAnimal() != 0)
+                        carteTemp.getpBleu().ajouter_haut(carteTemp.getpBleu().retirer_bas());
+                    else throw new IllegalArgumentException("L'ordre ne pas pas être exécuter car aucun animal ne peut être déplacé.");
+                case KI : // L’animal se trouvant en haut de la pile du podium bleu saute pour rejoindre le sommet de la pile du podium rouge.
+                    if (carteTemp.getpRouge().getNbAnimal() != 0)
+                        carteTemp.getpRouge().ajouter_haut(carteTemp.getpBleu().retirer_sommet());
+                    else throw new IllegalArgumentException("L'ordre ne pas pas être exécuter car aucun animal ne peut être déplacé.");
+                case LO : // L’animal se trouvant en haut de la pile du podium rouge saute pour rejoindre le sommet de la pile du podium bleu.
+                    if (carteTemp.getpBleu().getNbAnimal() != 0)
+                        carteTemp.getpBleu().ajouter_haut(carteTemp.getpRouge().retirer_sommet());
+                    else throw new IllegalArgumentException("L'ordre ne pas pas être exécuter car aucun animal ne peut être déplacé.");
+                case SO : // Les deux animaux se trouvant au sommet des piles des deux podiums échangent leur place.
+                    if (carteTemp.getpRouge().getNbAnimal() != 0 && carteTemp.getpBleu().getNbAnimal() != 0) {
+                        if (carteTemp.getpBleu().getNbAnimal() > carteTemp.getpRouge().getNbAnimal()) {
+                            carteTemp.getpRouge().ajouter_haut(carteTemp.getpBleu().retirer_sommet());
+                            carteTemp.getpBleu().ajouter_haut(carteTemp.getpRouge().retirer_bas());
+                        } else {
+                            carteTemp.getpBleu().ajouter_haut(carteTemp.getpRouge().retirer_sommet());
+                            carteTemp.getpRouge().ajouter_haut(carteTemp.getpBleu().retirer_bas());
+                        }
+                    }
+                    else throw new IllegalArgumentException("L'ordre ne pas pas être exécuter car aucun animal ne peut être déplacé.");
+                default : throw new IllegalArgumentException("L'ordre suivant n'existe pas : " + testOrdre);
             }
         }
         return carteTemp;
     }
-
-    // Fonction pour vérifier que la carte Temp est la même que celle finale
-    //TODO
 }
 
 

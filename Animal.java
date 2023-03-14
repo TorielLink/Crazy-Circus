@@ -5,13 +5,13 @@ public enum Animal{
 
     public static String getNomAnimal(Animal animal) {
         if (animal == LION)
-            return "  " + LION.toString() + "  ";
+            return "    " + LION.toString() + "    ";
         else if (animal == ELEPHANT)
-            return ELEPHANT.toString();
+            return "  " + ELEPHANT.toString() + "  ";
         else if (animal == OURS)
-            return "  " + OURS.toString() + "  ";
+            return "    " + OURS.toString() + "    ";
         else
-            return "        ";
+            return "            ";
     }
 }
 
