@@ -26,7 +26,7 @@ public class Joueur {
     }
 
     public static void setNbJoueursJoue(int nbJoueursJoue) {
-        Joueur.nbJoueursJoue++;
+        Joueur.nbJoueursJoue = nbJoueursJoue;
     }
 
     public void setScore() {
@@ -51,5 +51,10 @@ public class Joueur {
 
     public int getRang() {
         return rang;
+    }
+    
+    public String toString() {
+        return this.pseudo;
+
     }
 }
