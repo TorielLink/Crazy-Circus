@@ -57,10 +57,11 @@ public class Podium {
 
     }
 
-    public String getAnimal(int index) {
+    public Animal getAnimal(int index) {
         assert (index < 3 && index > 0);
-        StringBuilder sb = new StringBuilder();
-        return sb.append(this.animaux.get(index)).toString();
+        if (this.animaux.get(index) == null)
+            return null;
+        return this.animaux.get(index);
     }
 
     public String toString() {
@@ -72,5 +73,13 @@ public class Podium {
         sb.append("----\n");
         sb.append(this.couleur);
         return sb.toString();
+    }
+    
+    public ArrayList<Animal> getanimaux(){
+    	return this.animaux;
+    }
+    
+    public boolean compare(Podium p) {
+    	return this.animaux.equals(p.getanimaux());
     }
 }

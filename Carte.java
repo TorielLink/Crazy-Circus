@@ -1,6 +1,5 @@
 package crazy_circus;
 
-import javax.management.Query;
 
 public class Carte {
     private final Podium pBleu;
@@ -25,6 +24,6 @@ public class Carte {
     }
 
     public boolean compare(Carte carteAVerifier){
-        return this.equals(carteAVerifier);
+        return this.pBleu.compare(carteAVerifier.getpBleu()) && this.pRouge.compare(carteAVerifier.getpRouge());
     }
 }
