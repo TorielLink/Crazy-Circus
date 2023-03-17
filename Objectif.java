@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Objectif {
     //----------Mettre en enum dans un autre fichier----------
-    private final int nbCartes = 24;
+    private final int nbCartes = 5;
     private final int nbAnimaux = 3;
     //--------------------------------------------------------
     private final ArrayList<Carte> CartesObj;
@@ -14,7 +14,7 @@ public class Objectif {
     private int nbCartesRestantes;
 
     public Objectif() {
-        this.CartesObj = new ArrayList<Carte>();
+        this.CartesObj = new ArrayList<>();
         this.TabAnimaux = new Animal[]{Animal.ELEPHANT, Animal.LION, Animal.OURS};
         this.nbCartesRestantes = this.nbCartes;
     }

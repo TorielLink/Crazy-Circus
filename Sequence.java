@@ -13,7 +13,14 @@ public class Sequence {
         assert (sequenceOrdres.length() % 2 == 0) : "La séquence ne peut être impaire.";
         this.morceauSequence = new ArrayList<>();
         for (int i = 0; i < sequenceOrdres.length(); i+=2) {
-            this.morceauSequence.add(Ordres.valueOf(sequenceOrdres.toUpperCase().substring(i, i+2)));
+            try {
+                this.morceauSequence.add(Ordres.valueOf(sequenceOrdres.toUpperCase().substring(i, i+2)));
+            }
+            catch (IllegalArgumentException e) {
+                System.err.println("La séquence est incorrecte : un ordre n'existe pas");
+                this.morceauSequence.clear();
+                break;
+            }
         }
     }
 
@@ -23,39 +30,31 @@ public class Sequence {
 
         for (Ordres testOrdre: morceauSequence) {
             switch (testOrdre) {
-                case MA : // L’animal se trouvant en bas de la pile du podium rouge monte et se place en haut de la pile de ce même podium.
-                    if (carteTemp.getpRouge().getNbAnimal() != 0) {
+                case MA -> { // L’animal se trouvant en bas de la pile du podium rouge monte et se place en haut de la pile de ce même podium.
+                    if (carteTemp.getpRouge().getNbAnimal() != 0)
                         carteTemp.getpRouge().ajouter_haut(carteTemp.getpRouge().retirer_bas());
-                        break;
-                    }else { 
-                    	System.err.println("L'ordre ne pas pas être exécuté car aucun animal ne peut être déplacé."); 
-                    	break;
-                    }
-                case NI : // L’animal se trouvant en bas de la pile du podium bleu monte et se place en haut de la pile de ce même podium.
-                    if (carteTemp.getpBleu().getNbAnimal() != 0) {
+                    else
+                        System.err.println("L'ordre ne pas pas être exécuté car aucun animal ne peut être déplacé.");
+                }
+                case NI -> { // L’animal se trouvant en bas de la pile du podium bleu monte et se place en haut de la pile de ce même podium.
+                    if (carteTemp.getpBleu().getNbAnimal() != 0)
                         carteTemp.getpBleu().ajouter_haut(carteTemp.getpBleu().retirer_bas());
-                        break;
-                    }else { 
-                    	System.err.println("L'ordre ne pas pas être exécuté car aucun animal ne peut être déplacé."); 
-                    	break;
-                    }
-                case KI : // L’animal se trouvant en haut de la pile du podium bleu saute pour rejoindre le sommet de la pile du podium rouge.
-                    if (carteTemp.getpBleu().getNbAnimal() != 0) {
-                        carteTemp.getpRouge().ajouter_haut(carteTemp.getpBleu().retirer_sommet());                 
-                        break;
-                    }else { 
-                    	System.err.println("L'ordre ne pas pas être exécuté car aucun animal ne peut être déplacé."); 
-                    	break;
-                    }
-                case LO : // L’animal se trouvant en haut de la pile du podium rouge saute pour rejoindre le sommet de la pile du podium bleu.
-                    if (carteTemp.getpRouge().getNbAnimal() != 0) {
+                    else
+                        System.err.println("L'ordre ne pas pas être exécuté car aucun animal ne peut être déplacé.");
+                }
+                case KI -> { // L’animal se trouvant en haut de la pile du podium bleu saute pour rejoindre le sommet de la pile du podium rouge.
+                    if (carteTemp.getpBleu().getNbAnimal() != 0)
+                        carteTemp.getpRouge().ajouter_haut(carteTemp.getpBleu().retirer_sommet());
+                    else
+                        System.err.println("L'ordre ne pas pas être exécuté car aucun animal ne peut être déplacé.");
+                }
+                case LO -> { // L’animal se trouvant en haut de la pile du podium rouge saute pour rejoindre le sommet de la pile du podium bleu.
+                    if (carteTemp.getpRouge().getNbAnimal() != 0)
                         carteTemp.getpBleu().ajouter_haut(carteTemp.getpRouge().retirer_sommet());
-                        break;
-                    }else { 
-                    	System.err.println("L'ordre ne pas pas être exécuté car aucun animal ne peut être déplacé."); 
-                    	break;
-                    }
-                case SO : // Les deux animaux se trouvant au sommet des piles des deux podiums échangent leur place.
+                    else
+                        System.err.println("L'ordre ne pas pas être exécuté car aucun animal ne peut être déplacé.");
+                }
+                case SO -> { // Les deux animaux se trouvant au sommet des piles des deux podiums échangent leur place.
                     if (carteTemp.getpRouge().getNbAnimal() != 0 && carteTemp.getpBleu().getNbAnimal() != 0) {
                         if (carteTemp.getpBleu().getNbAnimal() > carteTemp.getpRouge().getNbAnimal()) {
                             carteTemp.getpRouge().ajouter_haut(carteTemp.getpBleu().retirer_sommet());
@@ -64,16 +63,9 @@ public class Sequence {
                             carteTemp.getpBleu().ajouter_haut(carteTemp.getpRouge().retirer_sommet());
                             carteTemp.getpRouge().ajouter_haut(carteTemp.getpBleu().retirer_bas());
                         }
-                        break;
-                    }
-                    else { 
-                    	System.err.println("L'ordre ne pas pas être exécuté car aucun animal ne peut être déplacé."); 
-                    	break;
-                    }
-                
-                default : 
-                	throw new IllegalArgumentException("L'ordre suivant n'existe pas : " + testOrdre);
-                	
+                    } else
+                        System.err.println("L'ordre ne pas pas être exécuté car aucun animal ne peut être déplacé.");
+                }
             }
         }
         return carteTemp;

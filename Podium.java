@@ -5,22 +5,16 @@ import java.util.Objects;
 
 
 public class Podium {
-    private String couleur;
+    private final String couleur;
     private int nbAnimal;
-    private ArrayList<Animal> animaux;
+    private final ArrayList<Animal> animaux;
 
 
     public Podium(String couleur) {
         assert (Objects.equals(couleur, "BLEU") || Objects.equals(couleur, "ROUGE"));
         this.couleur = couleur;
         this.nbAnimal = 0;
-        this.animaux = new ArrayList<Animal>();
-    }
-
-    public Podium(Podium p, String couleur) {
-        this(couleur);
-        this.nbAnimal += p.nbAnimal;
-        this.animaux.addAll(p.animaux);
+        this.animaux = new ArrayList<>();
     }
 
     public int getNbAnimal() {
@@ -75,11 +69,11 @@ public class Podium {
         return sb.toString();
     }
     
-    public ArrayList<Animal> getanimaux(){
+    public ArrayList<Animal> getAnimaux(){
     	return this.animaux;
     }
     
     public boolean compare(Podium p) {
-    	return this.animaux.equals(p.getanimaux());
+    	return this.animaux.equals(p.getAnimaux());
     }
 }
