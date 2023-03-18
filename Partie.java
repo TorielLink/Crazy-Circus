@@ -1,3 +1,10 @@
+/**
+ * Projet de première année à l'IUT de Paris - Rive de Seine
+ * Jeu de Crazy Circus par Dominique Ehrhard
+ * @author Clothilde PROUX, Suyi LYN
+ * @file Partie.java
+ * Joue une partie complète de Crazy Circus
+ */
 package crazy_circus;
 
 import java.util.Scanner;
@@ -10,40 +17,24 @@ public class Partie {
     private Carte carteFin;
     private static boolean premiereManche = true;
 
-
+    /**
+     * Constructeur vide créant une partie
+     */
     public Partie() {
         listeCartes = new Objectif();
         listeCartes.RemplirObj();
         listeJoueurs = new ArrayList<>();
     }
 
-
-    public String getNomAnimal(Animal animal) {
-        if (animal == Animal.LION)
-            return "    " + Animal.LION + "    ";
-        else if (animal == Animal.ELEPHANT)
-            return "  " + Animal.ELEPHANT + "  ";
-        else if (animal == Animal.OURS)
-            return "    " + Animal.OURS + "    ";
-        else
-            return "            ";
-    }
-
-    public int getNbJoueurs() {
-        return listeJoueurs.size();
-    }
-
     public Carte tirerCarte() {
         return listeCartes.CarteHasard();
     }
 
-    private void setJoueursPasJoue() { // Remet à false avant le début d'une autre manche
-        for (Joueur joueur : listeJoueurs) {
-            joueur.setAJoue(false);
-        }
-    }
-
-    public String affichageDeb() {
+    /**
+     * Affiche l'objectif, soit la carte de départ et celle de fin, et les ordres possibles
+     * @return les cartes de la manche et les ordres
+     */
+    public String affichageDebManche() {
         StringBuilder sb = new StringBuilder();
         int NB_ANIMAUX = 3;
         for (int i = NB_ANIMAUX - 1; i >= 0; --i) {
@@ -81,6 +72,10 @@ public class Partie {
         return sb.toString();
     }
 
+    /**
+     * Affiche la fin de la partie, le classement des joueurs
+     * @return le rang, le pseudo et le score des joueurs
+     */
     public static String affichageFin() {
         StringBuilder sb = new StringBuilder();
 
@@ -99,6 +94,9 @@ public class Partie {
         return sb.toString();
     }
 
+    /**
+     * Simule tout le déroulement de la partie
+     */
     @SuppressWarnings("ressource")
     public void jouerManche() {
         setJoueursPasJoue();
@@ -110,13 +108,11 @@ public class Partie {
         } else {
             this.carteInit = this.carteFin;
         }
-
         this.carteFin = tirerCarte();
 
-        System.out.println(this.affichageDeb());
+        System.out.println(this.affichageDebManche());
 
         while ((getNbJoueurs() - Joueur.getNbJoueursJoue()) != 1) { //Tant qu'il ne reste pas qu'un joueur pouvant jouer
-
             Scanner sc = new Scanner(System.in);
             String nomJoueur = sc.next();
             String reponseJoueur = sc.next();
@@ -133,6 +129,7 @@ public class Partie {
             } else if (joueurActuel.isAJoue())
                 System.err.println("Ce joueur a déjà joué");
 
+            // Teste la séquence proposée par le joueur
             else {
                 Sequence sequenceJoueur = new Sequence(reponseJoueur);
                 Carte carteReponseJoueur = sequenceJoueur.execute(this.carteInit);
@@ -158,6 +155,27 @@ public class Partie {
                 System.out.println("Le joueur " + joueur + " gagne cette manche ! ");
 
             }
+        }
+    }
+
+    public String getNomAnimal(Animal animal) {
+        if (animal == Animal.LION)
+            return "    " + Animal.LION + "    ";
+        else if (animal == Animal.ELEPHANT)
+            return "  " + Animal.ELEPHANT + "  ";
+        else if (animal == Animal.OURS)
+            return "    " + Animal.OURS + "    ";
+        else
+            return "            ";
+    }
+
+    public int getNbJoueurs() {
+        return listeJoueurs.size();
+    }
+
+    private void setJoueursPasJoue() { // Remet à false avant le début d'une autre manche
+        for (Joueur joueur : listeJoueurs) {
+            joueur.setAJoue(false);
         }
     }
 

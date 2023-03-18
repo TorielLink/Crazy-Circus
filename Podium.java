@@ -1,3 +1,10 @@
+/**
+ * Projet de première année à l'IUT de Paris - Rive de Seine
+ * Jeu de Crazy Circus par Dominique Ehrhard
+ * @author Clothilde PROUX, Suyi LYN
+ * @file Podium.java
+ * Podiums sur lequels les animaux seront
+ */
 package crazy_circus;
 
 import java.util.ArrayList;
@@ -7,9 +14,12 @@ import java.util.Objects;
 public class Podium {
     private final String couleur;
     private int nbAnimal;
-    private final ArrayList<Animal> animaux;
+    private ArrayList<Animal> animaux;
 
-
+    /**
+     * Constructeur avec une couleur
+     * @param couleur -> couleur du podium : soit rouge, soit bleu
+     */
     public Podium(String couleur) {
         assert (Objects.equals(couleur, "BLEU") || Objects.equals(couleur, "ROUGE"));
         this.couleur = couleur;
@@ -17,12 +27,9 @@ public class Podium {
         this.animaux = new ArrayList<>();
     }
 
-    public int getNbAnimal() {
-        return nbAnimal;
-    }
-
-    /*
+    /**
      * Ajoute au sommet du podium un animal
+     * @param animal → l'animal qui va être mis au sommet de la podium
      */
     public void ajouter_haut(Animal animal) {
         assert (this.nbAnimal < 3);
@@ -30,9 +37,9 @@ public class Podium {
         this.nbAnimal++;
     }
 
-    /*
+    /**
      * Retire l'animal se trouvant en bas du podium
-     * Retourne l'animal retiré
+     * @return l'animal retiré
      */
     public Animal retirer_sommet() {
         assert (this.nbAnimal > 0);
@@ -40,15 +47,28 @@ public class Podium {
         return this.animaux.remove(this.nbAnimal);
     }
 
-    /*
+    /**
      * Retire l'animal se trouvant au sommet du podium
-     * Retourne l'animal retiré
+     * @return l'animal retiré
      */
     public Animal retirer_bas() {
         assert (this.nbAnimal > 0);
         this.nbAnimal--;
         return this.animaux.remove(0);
 
+    }
+
+    /**
+     * Teste si deux podiums sont composés des mêmes animaux
+     * @param p -> le podium de comparaison
+     * @return true s'ils sont égaux ; false sinon
+     */
+    public boolean compare(Podium p) {
+        return this.animaux.equals(p.getAnimaux());
+    }
+
+    public int getNbAnimal() {
+        return nbAnimal;
     }
 
     public Animal getAnimal(int index) {
@@ -58,6 +78,14 @@ public class Podium {
         return this.animaux.get(index);
     }
 
+    public ArrayList<Animal> getAnimaux(){
+    	return this.animaux;
+    }
+
+    /**
+     * Affiche le podium : sa couleur et les animaux dessus
+     * @return la représentation en chaîne de caractère du podium
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for(int i = this.nbAnimal-1; i >= 0; --i) {
@@ -67,13 +95,5 @@ public class Podium {
         sb.append("----\n");
         sb.append(this.couleur);
         return sb.toString();
-    }
-    
-    public ArrayList<Animal> getAnimaux(){
-    	return this.animaux;
-    }
-    
-    public boolean compare(Podium p) {
-    	return this.animaux.equals(p.getAnimaux());
     }
 }

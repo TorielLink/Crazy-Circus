@@ -1,3 +1,10 @@
+/**
+ * Projet de première année à l'IUT de Paris - Rive de Seine
+ * Jeu de Crazy Circus par Dominique Ehrhard
+ * @author Clothilde PROUX, Suyi LYN
+ * @file Sequence.java
+ * Réponse du joueur et liste des ordres applicables aux animaux
+ */
 package crazy_circus;
 
 import java.util.ArrayList;
@@ -9,6 +16,11 @@ public class Sequence {
         KI, LO, MA, SO, NI
     }
 
+    /**
+     * Constructeur depuis une séquence
+     * Découpe en morceaux de deux caractères la séquence pour obtenir les ordres
+     * @param sequenceOrdres → la séquence jouée par le joueur
+     */
     public Sequence(String sequenceOrdres) {
         assert (sequenceOrdres.length() % 2 == 0) : "La séquence ne peut être impaire.";
         this.morceauSequence = new ArrayList<>();
@@ -24,6 +36,11 @@ public class Sequence {
         }
     }
 
+    /**
+     * Exécute les ordres de la séquence sur la carte de départ
+     * @param carteDepart → carte de départ de la manche en cours
+     * @return une carte temporaire qu'on comparera avec la carte de fin
+     */
     public Carte execute(Carte carteDepart) {
         Carte carteTemp = new Carte(carteDepart);
 
