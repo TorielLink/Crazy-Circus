@@ -5,7 +5,7 @@
  * @file Partie.java
  * Joue une partie complète de Crazy Circus
  */
-package crazy_circus;
+package test;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -26,6 +26,10 @@ public class Partie {
         listeJoueurs = new ArrayList<>();
     }
 
+    /*
+     * Tire une carte au hasard
+     * param[out] : La carte tirée
+     */
     public Carte tirerCarte() {
         return listeCartes.CarteHasard();
     }
@@ -62,7 +66,9 @@ public class Partie {
             sb.append("\n");
         }
         sb.append("    ----        ----     =>     ----        ---- \n");
-        sb.append("    BLEU        ROUGE    =>     BLEU        ROUGE \n");
+        sb.append("    "+ carteInit.getpBleu().getCouleur() +"        "+carteInit.getpRouge().getCouleur()+"    =");
+        sb.append(">     " + carteFin.getpBleu().getCouleur()+"        "+carteFin.getpRouge().getCouleur()+" \n");
+        
         sb.append("  ----------------------------------------------------\n");
         sb.append("""
                         KI : BLEU --> ROUGE    NI : BLEU ^
@@ -97,7 +103,7 @@ public class Partie {
     /**
      * Simule tout le déroulement de la partie
      */
-    @SuppressWarnings("ressource")
+    @SuppressWarnings("resource")
     public void jouerManche() {
         setJoueursPasJoue();
 
@@ -153,11 +159,15 @@ public class Partie {
 
                 joueur.setScore();
                 System.out.println("Le joueur " + joueur + " gagne cette manche ! ");
-
+                return;
             }
         }
     }
 
+    /* Renvoie comment chaque animal devra être affiché à l'ecran 
+     * @param[in] : Animal
+     * @param[out] : String de l'animal
+     */
     public String getNomAnimal(Animal animal) {
         if (animal == Animal.LION)
             return "    " + Animal.LION + "    ";
@@ -169,20 +179,34 @@ public class Partie {
             return "            ";
     }
 
+    /* Renvoie le nombre de joueurs
+     * param[out] : Le nombre de joueurs
+     */
     public int getNbJoueurs() {
         return listeJoueurs.size();
     }
 
+    
+    /* Met que tous les joueurs n'ont pas joué
+     * 
+     */
     private void setJoueursPasJoue() { // Remet à false avant le début d'une autre manche
         for (Joueur joueur : listeJoueurs) {
             joueur.setAJoue(false);
         }
     }
+    
+    
 
     public static void main(String[] args) {
         Partie partie = new Partie();
         for (String arg : args) {
             listeJoueurs.add(new Joueur(arg));
+        }
+        
+        if (listeJoueurs.size() == 0) {
+        	System.out.println("Il faut mettre les noms de joueurs avant de lancer de programme ! ");
+        	return;
         }
 
         while (listeCartes.getNbCartesRestantes() > 0) {

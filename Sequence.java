@@ -5,7 +5,7 @@
  * @file Sequence.java
  * Réponse du joueur et liste des ordres applicables aux animaux
  */
-package crazy_circus;
+package test;
 
 import java.util.ArrayList;
 
