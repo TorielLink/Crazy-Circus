@@ -5,7 +5,7 @@
  * @file Objectif.java
  * Jeu de cartes
  */
-package crazy_circus;
+package test;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -62,8 +62,8 @@ public class Objectif {
      * @param c → la carte qui va être remplie
      * @param indexAnimal → position de l'animal dans la liste
      * @param couleur -> couleur du podium
-     * @param suivant -> ???
-     * @param apresSuivant -> ???
+     * @param suivant -> L'index de l'animal à mettre après l'animal courant
+     * @param apresSuivant -> L'index de l'animal à mettre après l'animal suivant le courant
      * @param PMoitie → Arrivé à la moitié ? Les combinaisons sont les mêmes pour les deux podiums.
      */
     private void RemplirC(Carte c, int indexAnimal, String couleur, int suivant, int apresSuivant, Boolean PMoitie) {

@@ -5,7 +5,7 @@
  * @file Animal.java
  * Énumère les animaux du cirque.
  */
-package crazy_circus;
+package test;
 
 public enum Animal{
     OURS, LION, ELEPHANT

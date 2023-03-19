@@ -5,7 +5,7 @@
  * @file Joueur.java
  * Joueurs de la partie
  */
-package crazy_circus;
+package test;
 
 public class Joueur {
     private static int nbJoueursJoue = 0;

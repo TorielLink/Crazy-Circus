@@ -5,7 +5,7 @@
  * @file JoueurComparateur.java
  * Comparateur des scores et noms des joueurs
  */
-package crazy_circus;
+package test;
 
 import java.util.Comparator;
 
